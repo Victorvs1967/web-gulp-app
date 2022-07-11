@@ -1,16 +1,15 @@
 import gulp from 'gulp';
-import imagemin from 'gulp-imagemin';
 import browserSync from 'browser-sync';
 import uglify from 'gulp-uglify';
 import concat from 'gulp-concat';
 import rename from 'gulp-rename';
-import pug from 'gulp-pug';
-import dartSass from 'sass';
+import imagemin from 'gulp-imagemin';
 import gulpSass from 'gulp-sass';
+import dartSass from 'sass';
+import pug from 'gulp-pug';
 
-const sass = gulpSass(dartSass);
-
-const srcSass = ['src/**/*.sass', 'src/**/*.scss'],
+const sass = gulpSass(dartSass) ,
+      srcSass = ['src/**/*.sass', 'src/**/*.scss'],
       srcImages = ['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.png'],
       srcJs = 'src/**/*.js',
       srcPug = 'src/**/*.pug',
@@ -18,8 +17,18 @@ const srcSass = ['src/**/*.sass', 'src/**/*.scss'],
         'node_modules/magnific-popup/libs/jquery/jquery.js',
         'node_modules/slick-carousel/slick/slick.js', 
         'node_modules/magnific-popup/dist/jquery.magnific-popup.js'],
-      srcDir = 'src/',
+      srcDir = 'app/src/',
+      outputDir = 'app/dist';
       baseDir = 'app';
+
+// Static server
+gulp.task('browser-sync', () => {
+  browserSync.init({
+    server: {
+      baseDir: baseDir.concat('/')
+    }
+  });
+});
 
 gulp.task('images', () => gulp.src(srcImages)
   .pipe(imagemin())
@@ -57,15 +66,6 @@ gulp.task('pug', () => gulp.src(srcPug)
   .pipe(pug())
   .pipe(gulp.dest(baseDir))
   .pipe(browserSync.stream()));
-
-// Static server
-gulp.task('browser-sync', () => {
-  browserSync.init({
-    server: {
-      baseDir: baseDir.concat('/')
-    }
-  });
-});
 
 gulp.task('watch', () => {
   gulp.watch(srcSass, gulp.parallel('sass'));
