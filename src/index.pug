@@ -15,3 +15,8 @@ html(lang="en")
         each nav in ['home', 'about', 'contact']
           li.item
             a(href=`/${nav}`)=nav
+      h2 Images
+      .img__container
+        each img in ['img/cover.jpg', 'img/culture.jpg', 'img/enjoy.jpg', 'img/gallery.jpg']
+          img(src=`${img}`)
+          
