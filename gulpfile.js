@@ -65,7 +65,9 @@ gulp.task('browser-sync', () => {
       baseDir: baseDir.concat('/')
     }
   });
+});
 
+gulp.task('watch', () => {
   gulp.watch(srcSass, gulp.parallel('sass'));
   gulp.watch(srcJs, gulp.parallel(['lib', 'js']));
   gulp.watch(srcPug, gulp.parallel('pug'));
@@ -73,4 +75,4 @@ gulp.task('browser-sync', () => {
   gulp.watch(baseDir.concat('/*.html')).on('change', browserSync.reload);
 });
 
-gulp.task('default', gulp.parallel('css', 'sass', 'lib', 'js', 'pug', 'images', 'browser-sync'));
+gulp.task('default', gulp.parallel('watch', gulp.series('css', 'sass', 'lib', 'js', 'pug', 'images', 'browser-sync')));
