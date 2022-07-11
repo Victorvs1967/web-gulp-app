@@ -1,21 +1,39 @@
-const gulp = require('gulp'),
-      sass = require('gulp-sass')(require('sass')),
-      browserSync = require('browser-sync').create(),
-      uglify = require('gulp-uglify'),
-      concat = require('gulp-concat'),
-      rename = require('gulp-rename'),
-      pug = require('gulp-pug'),
-      data = require('gulp-data');
+import gulp from 'gulp';
+import imagemin from 'gulp-imagemin';
+import browserSync from 'browser-sync';
+import uglify from 'gulp-uglify';
+import concat from 'gulp-concat';
+import rename from 'gulp-rename';
+import pug from 'gulp-pug';
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+
+const sass = gulpSass(dartSass);
+
+// const gulp = require('gulp'),
+//       sass = require('gulp-sass')(require('sass')),
+//       browserSync = require('browser-sync').create(),
+//       uglify = require('gulp-uglify'),
+//       concat = require('gulp-concat'),
+//       rename = require('gulp-rename'),
+//       pug = require('gulp-pug'),
+//       data = require('gulp-data');
 
 const srcSass = ['src/**/*.sass', 'src/**/*.scss'],
+      srcImages = ['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.png'],
       srcJs = 'src/**/*.js',
       srcPug = 'src/**/*.pug',
       srcLib = [
         'node_modules/magnific-popup/libs/jquery/jquery.js',
         'node_modules/slick-carousel/slick/slick.js', 
         'node_modules/magnific-popup/dist/jquery.magnific-popup.js'],
-      srcDir = 'src/';
+      srcDir = 'src/',
       baseDir = 'app';
+
+gulp.task('images', () => gulp.src(srcImages)
+  .pipe(imagemin())
+  .pipe(gulp.dest(baseDir))
+  .pipe(browserSync.stream()));
 
 gulp.task('css', () => gulp.src([
     'node_modules/normalize.css/normalize.css',
@@ -45,12 +63,6 @@ gulp.task('js', () => gulp.src(srcJs)
   .pipe(browserSync.stream()));
 
 gulp.task('pug', () => gulp.src(srcPug)
-  .pipe(data(() => {
-    return {
-      __dirname: __dirname,
-      require: require
-    };
-  }))
   .pipe(pug())
   .pipe(gulp.dest(baseDir))
   .pipe(browserSync.stream()));
@@ -63,10 +75,11 @@ gulp.task('browser-sync', () => {
     }
   });
 
-  gulp.watch(srcJs, gulp.parallel(['lib', 'js']));
   gulp.watch(srcSass, gulp.parallel('sass'));
+  gulp.watch(srcJs, gulp.parallel(['lib', 'js']));
   gulp.watch(srcPug, gulp.parallel('pug'));
+  gulp.watch(srcImages, gulp.parallel('images'));
   gulp.watch(baseDir.concat('/*.html')).on('change', browserSync.reload);
 });
 
-gulp.task('default', gulp.parallel('css', 'sass', 'lib', 'js', 'pug', 'browser-sync'));
+gulp.task('default', gulp.parallel('css', 'sass', 'lib', 'js', 'pug', 'images', 'browser-sync'));
