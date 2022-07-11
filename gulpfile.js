@@ -68,7 +68,10 @@ gulp.task('js', () => gulp.src(srcJs)
   .pipe(browserSync.stream()));
 
 gulp.task('pug', () => gulp.src(srcPug)
-  .pipe(pug())
+  .pipe(pug({
+    doctype: 'html',
+    pretty: true
+  }))
   .pipe(gulp.dest(baseDir))
   .pipe(browserSync.stream()));
 

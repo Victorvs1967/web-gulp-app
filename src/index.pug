@@ -1,4 +1,3 @@
-doctype html
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -8,15 +7,17 @@ html(lang="en")
     script(src="js/lib.min.js" defer)
     script(src="js/main.min.js" defer)
   body
-    .container
-      h1 Hello Gulp!
-      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Id officiis unde sint. Iusto itaque modi exercitationem animi eveniet eaque minima similique maiores ducimus neque, odit odio blanditiis reiciendis ullam facilis?
-      ul.nav
-        each nav in ['home', 'about', 'contact']
-          li.item
-            a(href=`/${nav}`)=nav
-      h2 Images
-      .img__container
-        each img in ['img/cover.jpg', 'img/culture.jpg', 'img/enjoy.jpg', 'img/gallery.jpg']
-          img(src=`${img}`)
-          
+    .wrapper
+      header.header
+      .container
+        h1 Hello Gulp!
+        p Lorem ipsum dolor sit amet consectetur adipisicing elit. Id officiis unde sint. Iusto itaque modi exercitationem animi eveniet eaque minima similique maiores ducimus neque, odit odio blanditiis reiciendis ullam facilis?
+        ul.nav
+          each nav in ['home', 'about', 'contact']
+            li.item
+              a(href=`/${nav}`)=nav
+        h2 Images
+        .img__container
+          each img in ['img/cover.jpg', 'img/culture.jpg', 'img/enjoy.jpg', 'img/gallery.jpg']
+            img(src=`${img}`)
+
