@@ -11,10 +11,10 @@ import del from 'del';
 import autoprefixer  from 'gulp-autoprefixer';
 
 const sass = gulpSass(dartSass) ,
-      srcSass = ['app/src/**/*.sass', 'app/src/**/*.scss'],
-      srcImages = ['app/src/**/*.svg', 'app/src/**/*.jpg', 'app/src/**/*.gif', 'app/src/**/*.png'],
-      srcJs = 'app/src/**/*.js',
-      srcPug = 'app/src/**/*.pug',
+      srcSass = ['src/**/*.sass', 'src/**/*.scss'],
+      srcImages = ['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.png'],
+      srcJs = 'src/**/*.js',
+      srcPug = 'src/**/*.pug',
       srcLib = [
         'node_modules/magnific-popup/libs/jquery/jquery.js',
         'node_modules/slick-carousel/slick/slick.js', 
@@ -38,7 +38,7 @@ gulp.task('css', () => gulp.src([
     'node_modules/slick-carousel/slick/slick.css',
   ])
   .pipe(concat('_libs.scss'))
-  .pipe(gulp.dest(baseDir.concat('src/css')))
+  .pipe(gulp.dest('src/css'))
   .pipe(browserSync.stream()));
 
 gulp.task('images', () => gulp.src(srcImages)
@@ -80,20 +80,13 @@ gulp.task('watch', () => {
 });
 
 gulp.task('export', async () => {
-  gulp.src(baseDir.concat('*.html'))
-    .pipe(gulp.dest(baseDir.concat(outputDir)));
-  gulp.src(baseDir.concat('css/**/*.css'))
-    .pipe(gulp.dest(baseDir.concat(outputDir).concat('css')));
-  gulp.src(baseDir.concat('js/**/*.js'))
-    .pipe(gulp.dest(baseDir.concat(outputDir).concat('js')));
-  gulp.src(baseDir.concat('img/**/*.*'))
-    .pipe(gulp.dest(baseDir.concat(outputDir).concat('img')));
-  gulp.src(baseDir.concat('fonts/**/*.*'))
-    .pipe(gulp.dest(baseDir.concat(outputDir).concat('fonts')));
+  gulp.src(baseDir.concat('*.html')).pipe(gulp.dest(outputDir));
+  gulp.src(baseDir.concat('css/**/*.css')).pipe(gulp.dest(outputDir.concat('css')));
+  gulp.src(baseDir.concat('js/**/*.js')).pipe(gulp.dest(outputDir.concat('js')));
+  gulp.src(baseDir.concat('img/**/*.*')).pipe(gulp.dest(outputDir.concat('img')));
+  gulp.src(baseDir.concat('fonts/**/*.*')).pipe(gulp.dest(outputDir.concat('fonts')));
 });
 
-gulp.task('clean', async () => await del('app/dist/**'));
-
+gulp.task('clean', async () => await del('dist/**'));
 gulp.task('build', gulp.series('clean', 'export'));
-
 gulp.task('default', gulp.parallel('watch', gulp.series('css', 'sass', 'lib', 'js', 'pug', 'images', 'browser-sync')));
