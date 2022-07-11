@@ -10,15 +10,6 @@ import gulpSass from 'gulp-sass';
 
 const sass = gulpSass(dartSass);
 
-// const gulp = require('gulp'),
-//       sass = require('gulp-sass')(require('sass')),
-//       browserSync = require('browser-sync').create(),
-//       uglify = require('gulp-uglify'),
-//       concat = require('gulp-concat'),
-//       rename = require('gulp-rename'),
-//       pug = require('gulp-pug'),
-//       data = require('gulp-data');
-
 const srcSass = ['src/**/*.sass', 'src/**/*.scss'],
       srcImages = ['src/**/*.svg', 'src/**/*.jpg', 'src/**/*.gif', 'src/**/*.png'],
       srcJs = 'src/**/*.js',
