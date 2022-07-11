@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Home page
+    link(rel="stylesheet" href="css/style.min.css")
+    script(src="js/lib.min.js" defer)
+    script(src="js/main.min.js" defer)
+  body
+    .container
+      h1 Hello Gulp!
+      p Lorem ipsum dolor sit amet consectetur adipisicing elit. Id officiis unde sint. Iusto itaque modi exercitationem animi eveniet eaque minima similique maiores ducimus neque, odit odio blanditiis reiciendis ullam facilis?
+      ul.nav
+        each nav in ['home', 'about', 'contact']
+          li.item
+            a(href=`/${nav}`)=nav

@@ -6,9 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Victor Smirnov",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "browser-sync": "^2.27.10",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-data": "^1.3.1",
+    "gulp-pug": "^5.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "normalize.css": "^8.0.1",
+    "sass": "^1.53.0"
+  },
+  "dependencies": {
+    "magnific-popup": "^1.1.0",
+    "slick-carousel": "^1.8.1"
   }
 }

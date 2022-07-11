@@ -1,0 +1,44 @@
+@import 'libs.scss'
+@import 'vars'
+
+*
+  margin: 0
+  padding: 0
+
+html,
+body
+  box-sizing: border-box
+  font-size: $main-font-size
+
+body
+  height: 100vh
+  font-family: $main-font
+
+a
+  text-decoration: none
+
+ul
+  width: 30%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  list-style-type: none
+
+.container
+  height: calc(100% - $main-padding * 2)
+  padding: $main-padding
+  background: $main-background
+
+  h1
+    color: $main-color-primary
+    transition: all .3s ease-in-out
+
+    &:hover
+      font-size: 2.5rem
+      color: $main-color-secondary
+      cursor: pointer
+
+  p
+    margin-bottom: 1rem
+
+@import 'media'
